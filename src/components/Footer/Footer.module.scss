@@ -1,0 +1,63 @@
+@use "tokens" as t;
+
+.footer {
+  background: var(--color-dark);
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: auto;
+}
+
+.inner {
+  @include t.container;
+  display: grid;
+  gap: 2.5rem;
+  padding-block: 4rem;
+
+  @include t.respond(tablet) {
+    grid-template-columns: 2fr repeat(3, 1fr);
+  }
+}
+
+.brand {
+  max-width: 20rem;
+
+  p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-accent-contrast);
+}
+
+.column {
+  h3 {
+    font-size: 0.9rem;
+    color: var(--color-accent-contrast);
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  a:hover {
+    color: var(--color-accent-contrast);
+  }
+}
+
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+  p {
+    @include t.container;
+    padding-block: 1.5rem;
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,41 @@
+@use "tokens" as t;
+
+.section {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+.inner {
+  @include t.container;
+  padding-block: 4.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+}
+
+.subtitle {
+  margin-top: 1rem;
+  max-width: 30rem;
+  opacity: 0.9;
+}
+
+.cta {
+  margin-top: 2rem;
+  display: inline-flex;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-contrast);
+  color: var(--color-accent);
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}

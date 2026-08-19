@@ -1,0 +1,20 @@
+.placeholder {
+  width: 100%;
+  border-radius: var(--radius-md);
+  background: repeating-linear-gradient(
+    135deg,
+    var(--color-surface-alt),
+    var(--color-surface-alt) 10px,
+    var(--color-border) 10px,
+    var(--color-border) 20px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 1rem;
+}

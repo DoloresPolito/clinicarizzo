@@ -1,13 +1,22 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  // Paleta genérica de base — se reemplaza más adelante por la del cliente.
+  --color-background: #faf7f2;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1ece3;
+  --color-text: #1f1b16;
+  --color-text-muted: #6b6258;
+  --color-accent: #b5603f;
+  --color-accent-strong: #8f4a30;
+  --color-accent-contrast: #ffffff;
+  --color-border: #e6ded2;
+  --color-dark: #1f1b16;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-body: Arial, Helvetica, sans-serif;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
 }
 
 * {
@@ -20,6 +29,7 @@ body {
 }
 
 html {
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -29,12 +39,45 @@ body {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+  margin: 0;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0;
+  line-height: 1.6;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
 }

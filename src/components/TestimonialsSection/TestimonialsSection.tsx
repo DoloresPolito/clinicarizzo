@@ -1,0 +1,39 @@
+import styles from "./TestimonialsSection.module.scss";
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "Un trato increíble desde el primer momento. Me explicaron todo el proceso y el resultado superó mis expectativas.",
+    name: "Paciente",
+  },
+  {
+    quote:
+      "La atención y la tecnología que usan marcan la diferencia. Recomiendo la clínica sin dudarlo.",
+    name: "Paciente",
+  },
+  {
+    quote:
+      "Después de años sin sonreír con confianza, hoy me siento completamente distinto.",
+    name: "Paciente",
+  },
+];
+
+export default function TestimonialsSection() {
+  return (
+    <section id="testimonios" className={styles.section}>
+      <div className={styles.inner}>
+        <p className={styles.eyebrow}>Testimonios</p>
+        <h2 className={styles.title}>Lo que dicen nuestros pacientes</h2>
+
+        <div className={styles.grid}>
+          {TESTIMONIALS.map((testimonial, index) => (
+            <blockquote key={index} className={styles.card}>
+              <p className={styles.quote}>&ldquo;{testimonial.quote}&rdquo;</p>
+              <footer className={styles.name}>{testimonial.name}</footer>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
