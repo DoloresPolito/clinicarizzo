@@ -1,7 +1,7 @@
 @use "tokens" as t;
 
 .section {
-  background: var(--color-accent);
+  background: var(--color-dark);
   color: var(--color-accent-contrast);
 }
 
@@ -15,14 +15,15 @@
 }
 
 .title {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
   font-weight: 600;
 }
 
 .subtitle {
   margin-top: 1rem;
   max-width: 30rem;
-  opacity: 0.9;
+  font-size: 0.95rem;
+  opacity: 0.75;
 }
 
 .cta {
@@ -32,7 +33,10 @@
   border-radius: var(--radius-sm);
   background: var(--color-accent-contrast);
   color: var(--color-accent);
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   transition: opacity 0.2s ease;
 
   &:hover {

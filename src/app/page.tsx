@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <ValuesSection />
-      <ServicesSection />
+      <ValuesSection limit={2} viewMoreHref="/nosotros" />
+      <ServicesSection limit={3} viewMoreHref="/servicios" />
       <ProcessSection />
-      <TeamSection />
-      <TestimonialsSection />
+      <TeamSection limit={2} viewMoreHref="/equipo" />
+      <TestimonialsSection limit={2} viewMoreHref="/testimonios" />
       <CtaBanner />
     </main>
   );

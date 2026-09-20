@@ -4,13 +4,17 @@ $bp-desktop: 1024px;
 $bp-wide: 1280px;
 
 // Layout
-$max-width: 1200px;
+$max-width: 1400px;
 
 @mixin container {
   width: 100%;
   max-width: $max-width;
   margin-inline: auto;
   padding-inline: 1.5rem;
+
+  @include respond(desktop) {
+    padding-inline: 2.5rem;
+  }
 }
 
 // Uso: @include respond(tablet) { ... }

@@ -1,3 +1,4 @@
+import ViewMoreLink from "../ViewMoreLink/ViewMoreLink";
 import styles from "./ServicesSection.module.scss";
 
 const SERVICES = [
@@ -27,7 +28,17 @@ const SERVICES = [
   },
 ];
 
-export default function ServicesSection() {
+type ServicesSectionProps = {
+  limit?: number;
+  viewMoreHref?: string;
+};
+
+export default function ServicesSection({
+  limit,
+  viewMoreHref,
+}: ServicesSectionProps) {
+  const services = limit ? SERVICES.slice(0, limit) : SERVICES;
+
   return (
     <section id="servicios" className={styles.section}>
       <div className={styles.inner}>
@@ -35,7 +46,7 @@ export default function ServicesSection() {
         <h2 className={styles.title}>Todo lo que tu sonrisa necesita</h2>
 
         <div className={styles.grid}>
-          {SERVICES.map((service) => (
+          {services.map((service) => (
             <div key={service.title} className={styles.card}>
               <div className={styles.icon} aria-hidden="true" />
               <h3>{service.title}</h3>
@@ -43,6 +54,10 @@ export default function ServicesSection() {
             </div>
           ))}
         </div>
+
+        {viewMoreHref && (
+          <ViewMoreLink href={viewMoreHref} label="Ver todos los servicios" />
+        )}
       </div>
     </section>
   );

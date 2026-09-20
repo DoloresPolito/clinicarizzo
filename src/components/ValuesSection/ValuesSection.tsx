@@ -1,3 +1,4 @@
+import ViewMoreLink from "../ViewMoreLink/ViewMoreLink";
 import styles from "./ValuesSection.module.scss";
 
 const VALUES = [
@@ -18,7 +19,17 @@ const VALUES = [
   },
 ];
 
-export default function ValuesSection() {
+type ValuesSectionProps = {
+  limit?: number;
+  viewMoreHref?: string;
+};
+
+export default function ValuesSection({
+  limit,
+  viewMoreHref,
+}: ValuesSectionProps) {
+  const values = limit ? VALUES.slice(0, limit) : VALUES;
+
   return (
     <section id="nosotros" className={styles.section}>
       <div className={styles.inner}>
@@ -28,13 +39,17 @@ export default function ValuesSection() {
         </h2>
 
         <div className={styles.grid}>
-          {VALUES.map((value) => (
+          {values.map((value) => (
             <div key={value.title} className={styles.card}>
               <h3>{value.title}</h3>
               <p>{value.description}</p>
             </div>
           ))}
         </div>
+
+        {viewMoreHref && (
+          <ViewMoreLink href={viewMoreHref} label="Conocer más sobre nosotros" />
+        )}
       </div>
     </section>
   );

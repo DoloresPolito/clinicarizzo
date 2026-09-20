@@ -1,10 +1,11 @@
+import Link from "next/link";
 import styles from "./Footer.module.scss";
 
 const NAV_LINKS = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Equipo", href: "#equipo" },
-  { label: "Testimonios", href: "#testimonios" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Equipo", href: "/equipo" },
+  { label: "Testimonios", href: "/testimonios" },
 ];
 
 const SOCIAL_LINKS = [
@@ -29,7 +30,7 @@ export default function Footer() {
           <ul>
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
+                <Link href={link.href}>{link.label}</Link>
               </li>
             ))}
           </ul>

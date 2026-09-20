@@ -1,3 +1,4 @@
+import ViewMoreLink from "../ViewMoreLink/ViewMoreLink";
 import styles from "./TestimonialsSection.module.scss";
 
 const TESTIMONIALS = [
@@ -18,7 +19,17 @@ const TESTIMONIALS = [
   },
 ];
 
-export default function TestimonialsSection() {
+type TestimonialsSectionProps = {
+  limit?: number;
+  viewMoreHref?: string;
+};
+
+export default function TestimonialsSection({
+  limit,
+  viewMoreHref,
+}: TestimonialsSectionProps) {
+  const testimonials = limit ? TESTIMONIALS.slice(0, limit) : TESTIMONIALS;
+
   return (
     <section id="testimonios" className={styles.section}>
       <div className={styles.inner}>
@@ -26,13 +37,17 @@ export default function TestimonialsSection() {
         <h2 className={styles.title}>Lo que dicen nuestros pacientes</h2>
 
         <div className={styles.grid}>
-          {TESTIMONIALS.map((testimonial, index) => (
+          {testimonials.map((testimonial, index) => (
             <blockquote key={index} className={styles.card}>
               <p className={styles.quote}>&ldquo;{testimonial.quote}&rdquo;</p>
               <footer className={styles.name}>{testimonial.name}</footer>
             </blockquote>
           ))}
         </div>
+
+        {viewMoreHref && (
+          <ViewMoreLink href={viewMoreHref} label="Ver más testimonios" />
+        )}
       </div>
     </section>
   );

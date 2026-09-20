@@ -14,11 +14,12 @@
   letter-spacing: 0.12em;
   font-size: 0.8rem;
   color: var(--color-accent);
+  font-weight: 600;
   margin-bottom: 1rem;
 }
 
 .title {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
   max-width: 40rem;
   font-weight: 600;
 }
@@ -40,7 +41,7 @@
 .card {
   h3 {
     margin-top: 1rem;
-    font-size: 1.05rem;
+    font-size: 0.9rem;
     font-weight: 600;
   }
 
@@ -49,4 +50,22 @@
     color: var(--color-text-muted);
     font-size: 0.9rem;
   }
+}
+
+.photoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.specialty {
+  font-size: 0.8rem;
+  line-height: 1.4;
 }

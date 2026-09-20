@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ImagePlaceholder from "../ImagePlaceholder/ImagePlaceholder";
 import styles from "./Hero.module.scss";
 
@@ -21,12 +22,12 @@ export default function Hero() {
             enfoque integral pensado para tu salud dental.
           </p>
           <div className={styles.actions}>
-            <a href="#contacto" className={styles.primary}>
+            <Link href="/#contacto" className={styles.primary}>
               Reservar turno
-            </a>
-            <a href="#servicios" className={styles.secondary}>
+            </Link>
+            <Link href="/servicios" className={styles.secondary}>
               Conocer más
-            </a>
+            </Link>
           </div>
         </div>
 

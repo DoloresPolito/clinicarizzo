@@ -17,10 +17,20 @@
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.logoImage {
+  height: 2.25rem;
+  width: 2.25rem;
+  object-fit: contain;
 }
 
 .nav {
@@ -37,7 +47,10 @@
     gap: 2rem;
 
     a {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
       color: var(--color-text-muted);
       transition: color 0.2s ease;
 
@@ -55,8 +68,10 @@
   border-radius: var(--radius-sm);
   background: var(--color-accent);
   color: var(--color-accent-contrast);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   transition: background 0.2s ease;
 
   &:hover {

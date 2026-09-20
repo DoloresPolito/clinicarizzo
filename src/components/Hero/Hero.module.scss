@@ -27,17 +27,18 @@
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  color: var(--color-accent);
   margin-bottom: 1rem;
 }
 
 .title {
-  font-size: clamp(2.25rem, 5vw, 3.75rem);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
 
   span {
-    color: var(--color-accent-contrast);
+    color: var(--color-accent);
     font-weight: 700;
   }
 }
@@ -45,7 +46,7 @@
 .subtitle {
   margin-top: 1.5rem;
   max-width: 32rem;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -61,7 +62,10 @@
   border-radius: var(--radius-sm);
   background: var(--color-accent);
   color: var(--color-accent-contrast);
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   transition: background 0.2s ease;
 
   &:hover {
@@ -70,14 +74,18 @@
 }
 
 .secondary {
-  padding: 0.85rem 1.75rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   transition: border-color 0.2s ease;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.7);
+    border-color: rgba(255, 255, 255, 1);
   }
 }
 
@@ -114,6 +122,8 @@
 }
 
 .statLabel {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.55);
 }

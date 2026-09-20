@@ -1,14 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import styles from "./Header.module.scss";
 
 const NAV_LINKS = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Equipo", href: "#equipo" },
-  { label: "Testimonios", href: "#testimonios" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Equipo", href: "/equipo" },
+  { label: "Testimonios", href: "/testimonios" },
+  { label: "Contacto", href: "/#contacto" },
 ];
 
 export default function Header() {
@@ -17,23 +19,31 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <a href="#top" className={styles.logo}>
-          Clínica
-        </a>
+        <Link href="/" className={styles.logo}>
+          <Image
+            src="/logo/logo.png"
+            alt="Clínica Rizzo"
+            width={36}
+            height={36}
+            className={styles.logoImage}
+            priority
+          />
+          Clínica Rizzo
+        </Link>
 
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
           <ul>
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href} onClick={() => setIsMenuOpen(false)}>
+                <Link href={link.href} onClick={() => setIsMenuOpen(false)}>
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
-          <a href="#contacto" className={styles.cta}>
+          <Link href="/#contacto" className={styles.cta}>
             Reservar turno
-          </a>
+          </Link>
         </nav>
 
         <button
