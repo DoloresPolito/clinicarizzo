@@ -1,3 +1,4 @@
+import Reveal from "../Reveal/Reveal";
 import ViewMoreLink from "../ViewMoreLink/ViewMoreLink";
 import styles from "./TestimonialsSection.module.scss";
 
@@ -33,15 +34,23 @@ export default function TestimonialsSection({
   return (
     <section id="testimonios" className={styles.section}>
       <div className={styles.inner}>
-        <p className={styles.eyebrow}>Testimonios</p>
-        <h2 className={styles.title}>Lo que dicen nuestros pacientes</h2>
+        <Reveal>
+          <p className={styles.eyebrow}>Testimonios</p>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className={styles.title}>Lo que dicen nuestros pacientes</h2>
+        </Reveal>
 
         <div className={styles.grid}>
           {testimonials.map((testimonial, index) => (
-            <blockquote key={index} className={styles.card}>
-              <p className={styles.quote}>&ldquo;{testimonial.quote}&rdquo;</p>
-              <footer className={styles.name}>{testimonial.name}</footer>
-            </blockquote>
+            <Reveal key={index} delay={index * 90} y={14}>
+              <blockquote className={styles.card}>
+                <p className={styles.quote}>
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+                <footer className={styles.name}>{testimonial.name}</footer>
+              </blockquote>
+            </Reveal>
           ))}
         </div>
 

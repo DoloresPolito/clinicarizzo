@@ -1,3 +1,4 @@
+import Reveal from "../Reveal/Reveal";
 import styles from "./ProcessSection.module.scss";
 
 const STEPS = [
@@ -27,16 +28,24 @@ export default function ProcessSection() {
   return (
     <section className={styles.section}>
       <div className={styles.inner}>
-        <p className={styles.eyebrow}>Metodología</p>
-        <h2 className={styles.title}>Precisión en cada paso del tratamiento</h2>
+        <Reveal>
+          <p className={styles.eyebrow}>Metodología</p>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className={styles.title}>
+            Precisión en cada paso del tratamiento
+          </h2>
+        </Reveal>
 
         <div className={styles.grid}>
-          {STEPS.map((step) => (
-            <div key={step.number} className={styles.step}>
-              <span className={styles.number}>{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </div>
+          {STEPS.map((step, index) => (
+            <Reveal key={step.number} delay={index * 90} y={14}>
+              <div className={styles.step}>
+                <span className={styles.number}>{step.number}</span>
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,3 +1,4 @@
+import Reveal from "../Reveal/Reveal";
 import ViewMoreLink from "../ViewMoreLink/ViewMoreLink";
 import styles from "./ValuesSection.module.scss";
 
@@ -33,17 +34,23 @@ export default function ValuesSection({
   return (
     <section id="nosotros" className={styles.section}>
       <div className={styles.inner}>
-        <p className={styles.eyebrow}>Nuestra experiencia</p>
-        <h2 className={styles.title}>
-          Un nuevo concepto de odontología personalizada
-        </h2>
+        <Reveal>
+          <p className={styles.eyebrow}>Nuestra experiencia</p>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className={styles.title}>
+            Un nuevo concepto de odontología personalizada
+          </h2>
+        </Reveal>
 
         <div className={styles.grid}>
-          {values.map((value) => (
-            <div key={value.title} className={styles.card}>
-              <h3>{value.title}</h3>
-              <p>{value.description}</p>
-            </div>
+          {values.map((value, index) => (
+            <Reveal key={value.title} delay={index * 90} y={14}>
+              <div className={styles.card}>
+                <h3>{value.title}</h3>
+                <p>{value.description}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
 

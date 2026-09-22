@@ -1,0 +1,125 @@
+@use "tokens" as t;
+
+.section {
+  background: var(--color-background);
+}
+
+.inner {
+  @include t.container;
+  padding-block: 4.5rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  @include t.respond(desktop) {
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+    padding-block: 5.5rem 4rem;
+  }
+}
+
+.copy {
+  flex: 1;
+  max-width: 26rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 600;
+}
+
+.text {
+  margin-top: 1.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-text);
+  }
+}
+
+.visual {
+  flex: 1.2;
+}
+
+.visualImage {
+  border-radius: var(--radius-lg);
+}
+
+.banner {
+  background: var(--color-olive);
+  color: var(--color-olive-contrast);
+  overflow: hidden;
+  padding-block: 0.7rem;
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 50s linear infinite;
+
+  .banner:hover & {
+    animation-play-state: paused;
+  }
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding-inline: 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  white-space: nowrap;
+}
+
+.dot {
+  opacity: 0.6;
+  font-size: 0.7em;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}

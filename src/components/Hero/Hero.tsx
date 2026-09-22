@@ -1,48 +1,51 @@
-import Link from "next/link";
-import ImagePlaceholder from "../ImagePlaceholder/ImagePlaceholder";
+import Image from "next/image";
+import HashLink from "../HashLink/HashLink";
+import Parallax from "../Parallax/Parallax";
+import Reveal from "../Reveal/Reveal";
 import styles from "./Hero.module.scss";
-
-const STATS = [
-  { label: "Mejor clínica", value: "2025" },
-  { label: "Ubicación", value: "Buenos Aires" },
-  { label: "Especialidad", value: "Tecnología de vanguardia" },
-];
 
 export default function Hero() {
   return (
     <section id="top" className={styles.hero}>
+      <Parallax speed={0.08} max={36} className={styles.parallaxLayer}>
+        <div className={styles.imageStage}>
+          <Image
+            src="/imagenes/hero-final.jpeg"
+            alt="Consultorio de Clínica Rizzo"
+            fill
+            priority
+            sizes="100vw"
+            className={styles.backgroundImage}
+          />
+        </div>
+      </Parallax>
+      <div className={styles.scrim} aria-hidden="true" />
+
       <div className={styles.inner}>
         <div className={styles.copy}>
-          <p className={styles.eyebrow}>Salud y estética dental</p>
-          <h1 className={styles.title}>
-            Cuidado moderno para una <span>sonrisa perfecta</span>
-          </h1>
-          <p className={styles.subtitle}>
-            Del cuidado preventivo a las restauraciones más complejas, un
-            enfoque integral pensado para tu salud dental.
-          </p>
-          <div className={styles.actions}>
-            <Link href="/#contacto" className={styles.primary}>
-              Reservar turno
-            </Link>
-            <Link href="/servicios" className={styles.secondary}>
-              Conocer más
-            </Link>
-          </div>
+          <Reveal delay={0}>
+            <p className={styles.eyebrow}>
+              Centro odontológico · Gualeguaychú
+            </p>
+          </Reveal>
+          <Reveal delay={150}>
+            <h1 className={styles.title}>
+              Cuidado odontológico integral, <span>en un mismo lugar.</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={300}>
+            <p className={styles.subtitle}>
+              Odontología general, cirugía, implantes, estética y diagnóstico
+              por imágenes. Un equipo de especialistas para acompañarte en
+              cada etapa.
+            </p>
+          </Reveal>
+          <Reveal delay={450}>
+            <HashLink href="/#contacto" className={styles.cta}>
+              Reservar turno <span aria-hidden="true">→</span>
+            </HashLink>
+          </Reveal>
         </div>
-
-        <div className={styles.visual}>
-          <ImagePlaceholder label="Imagen principal" ratio="4 / 5" />
-        </div>
-      </div>
-
-      <div className={styles.statsBar}>
-        {STATS.map((stat) => (
-          <div key={stat.label} className={styles.stat}>
-            <span className={styles.statValue}>{stat.value}</span>
-            <span className={styles.statLabel}>{stat.label}</span>
-          </div>
-        ))}
       </div>
     </section>
   );

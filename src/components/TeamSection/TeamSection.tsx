@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Reveal from "../Reveal/Reveal";
 import ViewMoreLink from "../ViewMoreLink/ViewMoreLink";
 import styles from "./TeamSection.module.scss";
 
@@ -40,29 +41,35 @@ export default function TeamSection({ limit, viewMoreHref }: TeamSectionProps) {
   return (
     <section id="equipo" className={styles.section}>
       <div className={styles.inner}>
-        <p className={styles.eyebrow}>Equipo</p>
-        <h2 className={styles.title}>
-          Profesionales que combinan experiencia y calidez
-        </h2>
+        <Reveal>
+          <p className={styles.eyebrow}>Equipo</p>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className={styles.title}>
+            Profesionales que combinan experiencia y calidez
+          </h2>
+        </Reveal>
 
         <div className={styles.grid}>
           {team.map((member, index) => (
-            <div key={`${member.name}-${index}`} className={styles.card}>
-              <div className={styles.photoWrapper}>
-                <Image
-                  src={member.photo}
-                  alt={member.name}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-                  className={styles.photo}
-                />
+            <Reveal key={`${member.name}-${index}`} delay={index * 90} y={14}>
+              <div className={styles.card}>
+                <div className={styles.photoWrapper}>
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                    className={styles.photo}
+                  />
+                </div>
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+                {member.specialty && (
+                  <p className={styles.specialty}>{member.specialty}</p>
+                )}
               </div>
-              <h3>{member.name}</h3>
-              <p>{member.role}</p>
-              {member.specialty && (
-                <p className={styles.specialty}>{member.specialty}</p>
-              )}
-            </div>
+            </Reveal>
           ))}
         </div>
 

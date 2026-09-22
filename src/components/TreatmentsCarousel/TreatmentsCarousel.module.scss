@@ -1,0 +1,221 @@
+@use "tokens" as t;
+
+.section {
+  padding-block: 4.5rem;
+  background: var(--color-background);
+  scroll-margin-top: 4.75rem;
+}
+
+.header {
+  @include t.container;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+
+  @include t.respond(desktop) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 3rem;
+  }
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 600;
+  max-width: 28rem;
+}
+
+.headerText {
+  max-width: 24rem;
+
+  p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-border);
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-text);
+  }
+}
+
+.trackWrapper {
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-inline-start: 1.5rem;
+  padding-inline-end: 1.5rem;
+  padding-block-end: 0.5rem;
+  scrollbar-width: none;
+
+  @include t.respond(desktop) {
+    padding-inline-start: 2.5rem;
+    padding-inline-end: 0;
+    gap: 1rem;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.card {
+  position: relative;
+  flex: 0 0 auto;
+  width: min(78vw, 320px);
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  scroll-snap-align: start;
+
+  @include t.respond(tablet) {
+    width: min(42vw, 340px);
+  }
+
+  @include t.respond(desktop) {
+    width: min(30vw, 380px);
+  }
+}
+
+.cardImage {
+  object-fit: cover;
+  transition:
+    transform 0.7s cubic-bezier(0.19, 1, 0.22, 1),
+    filter 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.card:hover .cardImage,
+.card:focus-visible .cardImage {
+  transform: scale(1.08);
+  filter: blur(6px);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 9, 6, 0.75) 0%,
+    rgba(10, 9, 6, 0.15) 45%,
+    rgba(10, 9, 6, 0.05) 65%
+  );
+  transition: background 0.5s ease;
+}
+
+.card:hover .scrim,
+.card:focus-visible .scrim {
+  background: rgba(10, 9, 6, 0.55);
+}
+
+.cardTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  color: #ffffff;
+}
+
+.cardNumber {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  opacity: 0.75;
+  margin-bottom: 0.6rem;
+}
+
+.cardTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.cardDesc {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 3.75rem;
+  color: #ffffff;
+}
+
+.divider {
+  display: block;
+  height: 1px;
+  width: 0;
+  background: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.85rem;
+  transition: width 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0.05s;
+}
+
+.card:hover .divider,
+.card:focus-visible .divider {
+  width: 100%;
+}
+
+.cardDescText {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.5s ease 0.1s,
+    transform 0.5s ease 0.1s;
+}
+
+.card:hover .cardDescText,
+.card:focus-visible .cardDescText {
+  opacity: 0.9;
+  transform: translateY(0);
+}
+
+.plus {
+  position: absolute;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.card:hover .plus,
+.card:focus-visible .plus {
+  background: #ffffff;
+  color: var(--color-text);
+}

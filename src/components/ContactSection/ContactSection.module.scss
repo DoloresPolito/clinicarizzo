@@ -1,0 +1,153 @@
+@use "tokens" as t;
+
+.section {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-alt);
+  scroll-margin-top: 4.75rem;
+}
+
+.parallaxLayer {
+  position: absolute;
+  inset: -8% 0;
+  z-index: 0;
+}
+
+.backgroundImage {
+  object-fit: cover;
+  object-position: 25% center;
+  animation: contact-zoom 24s ease-in-out infinite alternate;
+
+  @include t.respond(tablet) {
+    object-position: 42% center;
+  }
+
+  @include t.respond(desktop) {
+    object-position: 58% center;
+  }
+}
+
+@keyframes contact-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backgroundImage {
+    animation: none;
+  }
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    rgba(238, 231, 216, 0.94) 0%,
+    rgba(238, 231, 216, 0.78) 42%,
+    rgba(238, 231, 216, 0.25) 65%,
+    rgba(238, 231, 216, 0) 80%
+  );
+}
+
+.inner {
+  @include t.container;
+  position: relative;
+  z-index: 2;
+  padding-block: 3.5rem;
+
+  @include t.respond(desktop) {
+    padding-block: 4.5rem;
+  }
+}
+
+.copy {
+  max-width: 30rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+  font-weight: 600;
+}
+
+.text {
+  margin-top: 1.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-olive);
+  color: var(--color-olive-contrast);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+
+  svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  &:hover {
+    background: var(--color-olive-strong);
+  }
+}
+
+.schedule {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.scheduleTitle {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: 1.1rem;
+}
+
+.scheduleGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+}
+
+.scheduleLabel {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.scheduleHours {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.92rem;
+  color: var(--color-text);
+}

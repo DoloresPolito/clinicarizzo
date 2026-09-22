@@ -3,13 +3,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import HashLink from "../HashLink/HashLink";
 import styles from "./Header.module.scss";
 
 const NAV_LINKS = [
-  { label: "Servicios", href: "/servicios" },
+  { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
+  { label: "Tratamientos", href: "/tratamientos" },
+  { label: "Tecnología", href: "/#tecnologia" },
   { label: "Equipo", href: "/equipo" },
-  { label: "Testimonios", href: "/testimonios" },
   { label: "Contacto", href: "/#contacto" },
 ];
 
@@ -23,27 +25,37 @@ export default function Header() {
           <Image
             src="/logo/logo.png"
             alt="Clínica Rizzo"
-            width={36}
-            height={36}
+            width={40}
+            height={40}
             className={styles.logoImage}
             priority
           />
-          Clínica Rizzo
+          <span className={styles.logoText}>
+            <span className={styles.logoLight}>Clínica</span>
+            <span className={styles.logoBold}>RIZZO</span>
+          </span>
         </Link>
 
         <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
           <ul>
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} onClick={() => setIsMenuOpen(false)}>
+                <HashLink
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   {link.label}
-                </Link>
+                </HashLink>
               </li>
             ))}
           </ul>
-          <Link href="/#contacto" className={styles.cta}>
-            Reservar turno
-          </Link>
+          <HashLink
+            href="/#contacto"
+            className={styles.cta}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Reservar turno <span aria-hidden="true">→</span>
+          </HashLink>
         </nav>
 
         <button

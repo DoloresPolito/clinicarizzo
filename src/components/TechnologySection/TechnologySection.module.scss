@@ -1,0 +1,106 @@
+@use "tokens" as t;
+
+.section {
+  padding-block: 5rem;
+  background: var(--color-background);
+  scroll-margin-top: 4.75rem;
+
+  @include t.respond(desktop) {
+    padding-block: 7rem;
+  }
+}
+
+.inner {
+  @include t.container;
+  display: grid;
+  gap: 2.5rem;
+
+  @include t.respond(desktop) {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 0.75fr);
+    align-items: center;
+    gap: 3rem;
+    min-height: 34rem;
+  }
+}
+
+.copy {
+  max-width: 26rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  font-weight: 600;
+}
+
+.text {
+  margin-top: 1.25rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-text);
+  }
+}
+
+.visual {
+  max-width: 22rem;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+
+  @include t.respond(desktop) {
+    margin-inline: 0;
+    max-width: 24rem;
+  }
+}
+
+.visualImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.visual:hover .visualImage {
+  transform: scale(1.05);
+}
+
+.highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--color-accent);
+
+  li {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+  }
+}

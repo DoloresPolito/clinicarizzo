@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import ServicesSection from "@/components/ServicesSection/ServicesSection";
+import TreatmentsSection from "@/components/TreatmentsSection/TreatmentsSection";
 import CtaBanner from "@/components/CtaBanner/CtaBanner";
 
 export const metadata: Metadata = {
-  title: "Servicios | Clínica Rizzo",
+  title: "Tratamientos | Clínica Rizzo",
   description: "Todos los tratamientos y especialidades de Clínica Rizzo.",
 };
 
-export default function ServiciosPage() {
+export default function TratamientosPage() {
   return (
     <main>
-      <ServicesSection />
+      <TreatmentsSection />
       <CtaBanner />
     </main>
   );

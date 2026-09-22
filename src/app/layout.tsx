@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Barlow } from "next/font/google";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
 import "./globals.scss";
 
 const barlow = Barlow({
@@ -28,9 +29,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={barlow.variable}>
       <body>
-        <Header />
-        {children}
-        <Footer />
+        <SmoothScroll>
+          <Header />
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
