@@ -7,7 +7,7 @@
 
 .inner {
   @include t.container;
-  padding-block: 4.5rem 3.5rem;
+  padding-block: 4.5rem 7rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -16,7 +16,7 @@
     flex-direction: row;
     align-items: flex-start;
     gap: 4rem;
-    padding-block: 5.5rem 4rem;
+    padding-block: 5.5rem 9rem;
   }
 }
 
@@ -27,10 +27,6 @@
 
 .eyebrow {
   @include t.section-eyebrow;
-}
-
-.eyebrowLine {
-  @include t.section-eyebrow-line;
 }
 
 .title {
@@ -74,10 +70,8 @@
 }
 
 .text {
-  @include t.type-body;
+  @include t.section-text;
   margin-top: 1.25rem;
-  color: var(--color-text-muted);
-  font-size: 1.05rem;
 }
 
 .visual {

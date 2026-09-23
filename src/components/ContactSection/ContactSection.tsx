@@ -83,7 +83,6 @@ export default function ContactSection() {
         <div className={styles.copy}>
           <Reveal>
             <p className={styles.eyebrow}>
-              <span className={styles.eyebrowLine} aria-hidden="true" />
               Es momento de dar el primer paso
             </p>
           </Reveal>

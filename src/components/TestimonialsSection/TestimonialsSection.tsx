@@ -36,7 +36,6 @@ export default function TestimonialsSection({
       <div className={styles.inner}>
         <Reveal>
           <p className={styles.eyebrow}>
-            <span className={styles.eyebrowLine} aria-hidden="true" />
             Testimonios
           </p>
         </Reveal>

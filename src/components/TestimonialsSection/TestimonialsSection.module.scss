@@ -12,10 +12,6 @@
   @include t.section-eyebrow;
 }
 
-.eyebrowLine {
-  @include t.section-eyebrow-line;
-}
-
 .title {
   @include t.section-title;
   max-width: 40rem;

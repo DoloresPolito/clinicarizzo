@@ -36,7 +36,6 @@ export default function TeamIntroSection() {
         <div className={styles.copy}>
           <Reveal>
             <p className={styles.eyebrow}>
-              <span className={styles.eyebrowLine} aria-hidden="true" />
               Nuestro equipo
             </p>
           </Reveal>

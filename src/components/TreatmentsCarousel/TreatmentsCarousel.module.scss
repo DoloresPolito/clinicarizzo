@@ -26,10 +26,6 @@
   @include t.section-eyebrow;
 }
 
-.eyebrowLine {
-  @include t.section-eyebrow-line;
-}
-
 .title {
   @include t.section-title;
   max-width: 28rem;
@@ -39,9 +35,7 @@
   max-width: 24rem;
 
   p {
-    @include t.type-body;
-    font-size: 1rem;
-    color: var(--color-text-muted);
+    @include t.section-text;
   }
 }
 
@@ -97,19 +91,20 @@
   --card-text: #ffffff;
   --card-border: rgba(255, 255, 255, 0.55);
   --card-h: clamp(280px, 34vw, 330px);
+  --card-base-w: min(var(--card-w), 300px);
+  --panel-radius: calc(var(--radius-lg) - 10px);
 
   position: relative;
   flex: 0 0 auto;
-  width: var(--card-w);
-  max-width: 300px;
+  width: var(--card-base-w);
   height: var(--card-h);
   border-radius: var(--radius-lg);
   overflow: hidden;
   scroll-snap-align: start;
   cursor: pointer;
   transition:
-    width 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-    height 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    width 0.8s cubic-bezier(0.45, 0, 0.2, 1),
+    height 0.8s cubic-bezier(0.45, 0, 0.2, 1);
 
   @include t.respond(desktop) {
     --card-h: clamp(280px, 22vw, 320px);
@@ -117,8 +112,7 @@
 }
 
 .cardActive {
-  width: calc(var(--card-w) * 2 + var(--card-gap));
-  max-width: 600px;
+  width: calc(var(--card-base-w) * 2 + var(--card-gap));
 }
 
 .cardImageWrap {
@@ -216,42 +210,63 @@
 }
 
 .cardPanel {
+  // Tamaño final del panel abierto. El contenido siempre mide esto, así el
+  // texto no se reacomoda mientras el contenedor crece.
+  --panel-w: calc(var(--card-base-w) + var(--card-gap) * 0.5 - 0.75rem);
+  --panel-h: calc(var(--card-h) - 1.5rem);
+
   position: absolute;
   top: 0.75rem;
-  bottom: 0.75rem;
-  left: calc(100% - 0.75rem);
   right: 0.75rem;
-  border-radius: calc(var(--radius-lg) - 10px);
+  // Cerrado es un círculo del tamaño del botón ↗; al abrir crece en
+  // diagonal hacia abajo y a la izquierda.
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
   overflow: hidden;
   background: rgba(10, 9, 6, 0.38);
   backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid rgba(255, 255, 255, 0.18);
   opacity: 0;
   pointer-events: none;
   transition:
-    left 0.5s cubic-bezier(0.19, 1, 0.22, 1),
-    opacity 0.3s ease;
+    width 0.55s cubic-bezier(0.45, 0, 0.2, 1),
+    height 0.55s cubic-bezier(0.45, 0, 0.2, 1),
+    border-radius 0.55s cubic-bezier(0.45, 0, 0.2, 1),
+    opacity 0.25s ease 0.3s;
 }
 
 .cardActive .cardPanel {
-  left: calc(var(--card-w) + var(--card-gap) * 0.5);
+  width: var(--panel-w);
+  height: var(--panel-h);
+  border-radius: var(--panel-radius);
   opacity: 1;
   pointer-events: auto;
+  transition:
+    width 0.8s cubic-bezier(0.33, 0, 0.25, 1) 0.1s,
+    height 0.8s cubic-bezier(0.33, 0, 0.25, 1) 0.1s,
+    border-radius 0.6s ease 0.1s,
+    opacity 0.2s ease 0.1s;
 }
 
 .cardPanelInner {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--panel-w);
+  height: var(--panel-h);
   padding: 1.1rem 1.25rem;
   display: flex;
   flex-direction: column;
+  // El texto se funde a medida que el contenedor crece y termina de
+  // aparecer justo cuando el contenedor llega a su tamaño final.
   opacity: 0;
-  transition: opacity 0.3s ease 0.1s;
+  transition: opacity 0.15s ease;
 }
 
 .cardActive .cardPanelInner {
   opacity: 1;
+  transition: opacity 0.45s ease 0.45s;
 }
 
 .cardPanelLink {
@@ -284,33 +299,43 @@
 }
 
 // En mobile/tablet chico no hay lugar para abrir la tarjeta hacia el
-// costado: se abre hacia abajo en su lugar.
+// costado: el panel aparece sobre la imagen, sin cambiar el tamaño.
 @media (max-width: 767px) {
   .card {
     --card-h: clamp(280px, 90vw, 330px);
   }
 
   .cardActive {
-    width: var(--card-w);
-    max-width: 300px;
-    height: calc(var(--card-h) + 180px);
+    width: var(--card-base-w);
   }
 
+  // En mobile el panel crece desde el botón (abajo a la derecha) en
+  // diagonal hacia arriba y a la izquierda.
   .cardPanel {
-    left: 0.75rem;
-    right: 0.75rem;
-    top: calc(100% - 0.75rem);
+    --panel-w: calc(var(--card-base-w) - 1.5rem);
+    --panel-h: 10.5rem;
+
+    top: auto;
     bottom: 0.75rem;
   }
 
-  .cardActive .cardPanel {
-    left: 0.75rem;
-    right: 0.75rem;
-    top: calc(var(--card-h) + 0.4rem);
-    bottom: 0.75rem;
+  .cardPanelInner {
+    top: auto;
+    bottom: 0;
   }
 
   .cardPanelText {
     margin-top: 0.6rem;
+  }
+
+  .cardToggle {
+    transition:
+      background 0.25s ease,
+      color 0.25s ease,
+      opacity 0.25s ease;
+  }
+
+  .cardActive .cardToggle {
+    opacity: 0;
   }
 }

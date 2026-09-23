@@ -1,0 +1,153 @@
+@use "tokens" as t;
+
+.section {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-background);
+  scroll-margin-top: 4.75rem;
+
+  @include t.respond(desktop) {
+    display: flex;
+    align-items: center;
+    min-height: clamp(560px, 46vw, 760px);
+  }
+}
+
+// En mobile la imagen va arriba como bloque; en desktop pasa a ser el fondo
+// de toda la sección, con el texto sobre el lado izquierdo (que en la foto
+// ya es una pared clara).
+.media {
+  position: relative;
+  height: 17rem;
+
+  @include t.respond(tablet) {
+    height: 24rem;
+  }
+
+  @include t.respond(desktop) {
+    position: absolute;
+    inset: -24px 0;
+    height: auto;
+  }
+}
+
+.image {
+  object-fit: cover;
+  object-position: 68% center;
+
+  @include t.respond(desktop) {
+    object-position: right center;
+  }
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  // Mobile: funde el borde inferior de la imagen con el fondo.
+  background: linear-gradient(
+    180deg,
+    rgba(246, 241, 230, 0) 0,
+    rgba(246, 241, 230, 0) 12rem,
+    var(--color-background) 17rem
+  );
+
+  @include t.respond(tablet) {
+    background: linear-gradient(
+      180deg,
+      rgba(246, 241, 230, 0) 0,
+      rgba(246, 241, 230, 0) 18rem,
+      var(--color-background) 24rem
+    );
+  }
+
+  @include t.respond(desktop) {
+    background: linear-gradient(
+      to right,
+      rgba(246, 241, 230, 0.75) 0%,
+      rgba(246, 241, 230, 0.55) 30%,
+      rgba(246, 241, 230, 0) 46%
+    );
+  }
+}
+
+.inner {
+  @include t.container;
+  position: relative;
+  z-index: 2;
+  padding-block: 1rem 4.5rem;
+
+  @include t.respond(desktop) {
+    padding-block: 5rem;
+  }
+}
+
+.copy {
+  max-width: 30rem;
+
+  // En desktop el texto ocupa solo la pared libre de la foto.
+  @include t.respond(desktop) {
+    max-width: 25rem;
+  }
+}
+
+.eyebrow {
+  @include t.section-eyebrow;
+}
+
+.title {
+  @include t.section-title;
+}
+
+.titleAccent {
+  color: var(--color-accent);
+}
+
+.text {
+  @include t.section-text;
+  margin-top: 1.5rem;
+}
+
+// Datos destacados, mismo lenguaje que la franja inferior del hero.
+.stats {
+  list-style: none;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  & + & {
+    padding-inline-start: 1.25rem;
+    border-inline-start: 1px solid rgba(33, 32, 27, 0.25);
+  }
+
+  &:not(:last-child) {
+    padding-inline-end: 1.25rem;
+  }
+}
+
+.statValue {
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-heading);
+}
+
+.statLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(33, 32, 27, 0.7);
+
+  @include t.respond(desktop) {
+    font-size: 0.66rem;
+  }
+}

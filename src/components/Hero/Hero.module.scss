@@ -3,9 +3,12 @@
 .hero {
   position: relative;
   display: flex;
-  align-items: center;
-  min-height: calc(100svh - 4.75rem);
-  padding-block: 2.5rem;
+  flex-direction: column;
+  // El hero sube por debajo del header (sticky, 4.75rem) para que se vea
+  // la imagen a través de la navbar translúcida.
+  margin-top: -4.75rem;
+  padding-top: 4.75rem;
+  min-height: 100svh;
   overflow: hidden;
   background: var(--color-background);
 }
@@ -26,15 +29,13 @@
 
 .backgroundImage {
   object-fit: cover;
-  object-position: 25% center;
+  // En mobile se centra la pieza dental; en desktop la imagen ya deja
+  // el lado izquierdo libre para el texto.
+  object-position: 72% center;
   animation: hero-zoom 28s ease-in-out infinite alternate;
 
-  @include t.respond(tablet) {
-    object-position: 45% center;
-  }
-
   @include t.respond(desktop) {
-    object-position: 62% center;
+    object-position: center;
   }
 }
 
@@ -75,64 +76,208 @@
   inset: 0;
   z-index: 1;
   background: linear-gradient(
-    to right,
-    rgba(246, 241, 230, 0.88) 0%,
-    rgba(246, 241, 230, 0.6) 38%,
-    rgba(246, 241, 230, 0.1) 62%,
-    rgba(246, 241, 230, 0) 75%
+    180deg,
+    rgba(246, 241, 230, 0.85) 0%,
+    rgba(246, 241, 230, 0.7) 55%,
+    rgba(246, 241, 230, 0.35) 100%
   );
+
+  @include t.respond(desktop) {
+    background: linear-gradient(
+      to right,
+      rgba(246, 241, 230, 0.55) 0%,
+      rgba(246, 241, 230, 0.25) 40%,
+      rgba(246, 241, 230, 0) 58%
+    );
+  }
 }
 
 .inner {
   @include t.container;
   position: relative;
   z-index: 2;
-  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-block: 3rem 2rem;
+
+  @include t.respond(desktop) {
+    padding-block: 4rem 2.5rem;
+  }
 }
 
 .copy {
-  max-width: 28rem;
+  max-width: 40rem;
 }
 
 .eyebrow {
   @include t.section-eyebrow;
-}
 
-.eyebrowLine {
-  @include t.section-eyebrow-line;
+  @include t.respond(desktop) {
+    margin-bottom: 2rem;
+  }
 }
 
 .title {
-  @include t.section-title;
-  color: var(--color-text);
+  font-size: clamp(2.1rem, 3.3vw, 3.15rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--color-heading);
 
-  span {
-    display: block;
-    color: var(--color-text-muted);
+  @include t.respond(tablet) {
+    span {
+      display: block;
+    }
   }
+}
+
+.titleAccent {
+  display: block;
+  color: var(--color-accent);
 }
 
 .subtitle {
   @include t.type-body;
-  margin-top: 1.25rem;
-  max-width: 28rem;
-  font-size: 1.05rem;
-  color: var(--color-text-muted);
+  margin-top: 1.5rem;
+  max-width: 29rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: rgba(33, 32, 27, 0.78);
+
+  @include t.respond(desktop) {
+    margin-top: 1.5rem;
+    font-size: 1.05rem;
+  }
 }
 
 .cta {
   @include t.type-button;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   margin-top: 1.75rem;
-  padding: 0.9rem 1.75rem;
+  padding: 0.7rem 1.4rem;
   border-radius: var(--radius-pill);
   background: var(--color-accent);
   color: var(--color-accent-contrast);
+  font-size: 0.92rem;
+  font-weight: 400;
   transition: background 0.2s ease;
+
+  @include t.respond(desktop) {
+    margin-top: 2rem;
+  }
 
   &:hover {
     background: var(--color-accent-strong);
+  }
+}
+
+// Franja inferior: especialidades destacadas + indicador para bajar.
+.footer {
+  @include t.container;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-block-end: 2rem;
+  opacity: 0;
+  animation: hero-footer-in 1.2s ease 0.7s forwards;
+
+  @include t.respond(desktop) {
+    align-items: center;
+    padding-block-end: 2.75rem;
+  }
+}
+
+@keyframes hero-footer-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.highlights {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  @include t.respond(desktop) {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    max-width: 72rem;
+  }
+}
+
+.highlight {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(33, 32, 27, 0.8);
+
+  @include t.respond(desktop) {
+    font-size: 0.66rem;
+
+    & + & {
+      padding-inline-start: 3rem;
+      border-inline-start: 1px solid rgba(33, 32, 27, 0.55);
+    }
+  }
+}
+
+.highlightNumber {
+  letter-spacing: 0.08em;
+}
+
+.highlightLine {
+  width: 2.5rem;
+  height: 1px;
+  background: rgba(33, 32, 27, 0.55);
+  flex-shrink: 0;
+
+  @include t.respond(desktop) {
+    width: 3.25rem;
+  }
+}
+
+.scrollCue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid rgba(33, 32, 27, 0.7);
+  color: var(--color-text);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+
+  @include t.respond(desktop) {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  &:hover {
+    background: var(--color-text);
+    color: var(--color-background);
   }
 }

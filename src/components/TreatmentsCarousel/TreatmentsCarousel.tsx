@@ -98,7 +98,6 @@ export default function TreatmentsCarousel() {
         <div>
           <Reveal>
             <p className={styles.eyebrow}>
-              <span className={styles.eyebrowLine} aria-hidden="true" />
               Nuestros tratamientos
             </p>
           </Reveal>

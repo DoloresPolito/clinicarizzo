@@ -31,37 +31,13 @@
   @include t.section-eyebrow;
 }
 
-.eyebrowLine {
-  @include t.section-eyebrow-line;
-}
-
 .title {
   @include t.section-title;
 }
 
 .text {
-  @include t.type-body;
+  @include t.section-text;
   margin-top: 1.25rem;
-  color: var(--color-text-muted);
-  font-size: 1.05rem;
-}
-
-.button {
-  @include t.type-button;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 2rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--color-border);
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
-
-  &:hover {
-    border-color: var(--color-text);
-  }
 }
 
 .visual {

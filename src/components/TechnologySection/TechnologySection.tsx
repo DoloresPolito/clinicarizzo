@@ -1,5 +1,4 @@
 import Image from "next/image";
-import HashLink from "../HashLink/HashLink";
 import Parallax from "../Parallax/Parallax";
 import Reveal from "../Reveal/Reveal";
 import styles from "./TechnologySection.module.scss";
@@ -18,7 +17,6 @@ export default function TechnologySection() {
         <div className={styles.copy}>
           <Reveal>
             <p className={styles.eyebrow}>
-              <span className={styles.eyebrowLine} aria-hidden="true" />
               Tecnología
             </p>
           </Reveal>
@@ -35,11 +33,6 @@ export default function TechnologySection() {
               radiografía panorámica. Esto nos permite detectar y tratar
               problemas bucales con mayor exactitud y confianza.
             </p>
-          </Reveal>
-          <Reveal delay={240}>
-            <HashLink href="/#tratamientos" className={styles.button}>
-              Conocé nuestra tecnología <span aria-hidden="true">→</span>
-            </HashLink>
           </Reveal>
         </div>
 

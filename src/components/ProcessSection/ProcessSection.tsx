@@ -30,7 +30,6 @@ export default function ProcessSection() {
       <div className={styles.inner}>
         <Reveal>
           <p className={styles.eyebrow}>
-            <span className={styles.eyebrowLine} aria-hidden="true" />
             Metodología
           </p>
         </Reveal>

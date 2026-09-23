@@ -34,30 +34,19 @@
   margin-bottom: 1.5rem;
 }
 
-.eyebrowLine {
-  @include t.section-eyebrow-line;
-}
-
 .title {
   @include t.section-title;
 }
 
 .text {
-  @include t.type-body;
+  @include t.section-text;
   margin-top: 1.5rem;
-  color: var(--color-text-muted);
-  font-size: 1rem;
   max-width: 26rem;
 }
 
 .whatsapp {
-  @include t.type-button;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: 2rem;
-  padding: 0.9rem 1.7rem;
-  border-radius: var(--radius-pill);
+  @include t.button-compact;
+  margin-top: 1.75rem;
   background: var(--color-olive);
   color: var(--color-olive-contrast);
   transition: background 0.2s ease;
