@@ -35,7 +35,10 @@ export default function TestimonialsSection({
     <section id="testimonios" className={styles.section}>
       <div className={styles.inner}>
         <Reveal>
-          <p className={styles.eyebrow}>Testimonios</p>
+          <p className={styles.eyebrow}>
+            <span className={styles.eyebrowLine} aria-hidden="true" />
+            Testimonios
+          </p>
         </Reveal>
         <Reveal delay={80}>
           <h2 className={styles.title}>Lo que dicen nuestros pacientes</h2>

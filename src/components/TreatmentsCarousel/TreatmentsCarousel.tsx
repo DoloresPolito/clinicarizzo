@@ -1,62 +1,75 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, type WheelEvent } from "react";
+import { useRef, useState, type KeyboardEvent, type WheelEvent } from "react";
 import HashLink from "../HashLink/HashLink";
+import ImagePlaceholder from "../ImagePlaceholder/ImagePlaceholder";
 import Reveal from "../Reveal/Reveal";
 import styles from "./TreatmentsCarousel.module.scss";
 
 const CARDS = [
   {
     number: "01",
-    title: "Odontología general",
+    title: "Cirugía e Implantología Oral",
     description:
-      "Prevención, diagnóstico y tratamientos para una salud bucal duradera.",
-    image: "/imagenes/tratamientos/a.jpg",
-    href: "/tratamientos#general",
-  },
-  {
-    number: "02",
-    title: "Implantes y cirugía",
-    description:
-      "Soluciones para recuperar piezas perdidas y devolver función y comodidad.",
-    image: "/imagenes/tratamientos/e-crop.jpg",
+      "Reponemos piezas perdidas con implantes de precisión, devolviendo función y estética a tu sonrisa.",
+    image: "/imagenes/tratamientos/t1.jpeg",
     href: "/tratamientos#implantes",
   },
   {
-    number: "03",
-    title: "Estética dental",
-    description:
-      "Tratamientos que mejoran la estética de forma natural y armónica.",
-    image: "/imagenes/tratamientos/c.jpg",
-    href: "/tratamientos#estetica",
-  },
-  {
-    number: "04",
+    number: "02",
     title: "Endodoncia",
     description:
-      "Diagnóstico y tratamiento para conservar tus piezas dentales.",
-    image: "/imagenes/tratamientos/d.jpg",
+      "Tratamos la raíz del problema para conservar tus piezas dentales naturales y aliviar el dolor.",
+    image: "/imagenes/tratamientos/t3.jpeg",
     href: "/tratamientos#endodoncia",
   },
   {
-    number: "05",
-    title: "Rehabilitación integral",
-    description: "Planificación y recuperación funcional y estética.",
-    image: "/imagenes/tratamientos/b.jpg",
+    number: "03",
+    title: "Periodoncia",
+    description:
+      "Cuidamos la salud de encías y tejidos de sostén para una base bucal fuerte y duradera.",
+    image: "/imagenes/tratamientos/t2.jpeg",
+    href: "/tratamientos#periodoncia",
+  },
+  {
+    number: "04",
+    title: "Rehabilitación Integral",
+    description:
+      "Planificamos tratamientos completos que recuperan función y estética de forma armónica.",
+    image: "/imagenes/tratamientos/t4.jpeg",
     href: "/tratamientos#rehabilitacion",
   },
   {
+    number: "05",
+    title: "Odontología General",
+    description:
+      "Prevención, diagnóstico y controles periódicos para mantener tu salud bucal a largo plazo.",
+    image: null,
+    href: "/tratamientos#general",
+  },
+  {
     number: "06",
-    title: "Diagnóstico por imágenes",
-    description: "Radiografías y tomografías para una mejor planificación.",
-    image: "/imagenes/tomo-final.jpeg",
+    title: "Diagnóstico por Imágenes",
+    description:
+      "Radiografías y tomografías de alta precisión para planificar cada tratamiento con exactitud.",
+    image: "/imagenes/tratamientos/t6.jpeg",
     href: "/tratamientos#diagnostico",
+    dark: true,
+  },
+  {
+    number: "07",
+    title: "Estética Dental",
+    description:
+      "Mejoramos tu sonrisa de forma natural y armónica, con resultados que se ven y se sienten bien.",
+    image: "/imagenes/tratamientos/t5.jpeg",
+    href: "/tratamientos#estetica",
   },
 ];
 
 export default function TreatmentsCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleWheel = (event: WheelEvent<HTMLDivElement>) => {
     const track = trackRef.current;
@@ -65,12 +78,29 @@ export default function TreatmentsCarousel() {
     track.scrollLeft += event.deltaY;
   };
 
+  const toggleCard = (index: number) => {
+    setActiveIndex((current) => (current === index ? null : index));
+  };
+
+  const handleKeyDown = (
+    event: KeyboardEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleCard(index);
+    }
+  };
+
   return (
-    <section className={styles.section}>
+    <section id="tratamientos" className={styles.section}>
       <div className={styles.header}>
         <div>
           <Reveal>
-            <p className={styles.eyebrow}>Nuestros tratamientos</p>
+            <p className={styles.eyebrow}>
+              <span className={styles.eyebrowLine} aria-hidden="true" />
+              Nuestros tratamientos
+            </p>
           </Reveal>
           <Reveal delay={80}>
             <h2 className={styles.title}>
@@ -83,37 +113,71 @@ export default function TreatmentsCarousel() {
             Trabajamos de forma coordinada para ofrecerte un plan de
             tratamiento integral, adaptado a tus necesidades.
           </p>
-          <HashLink href="/tratamientos" className={styles.link}>
-            Ver todos los tratamientos <span aria-hidden="true">→</span>
-          </HashLink>
         </Reveal>
       </div>
 
       <Reveal delay={220} className={styles.trackWrapper}>
         <div className={styles.track} ref={trackRef} onWheel={handleWheel}>
-          {CARDS.map((card) => (
-            <HashLink key={card.title} href={card.href} className={styles.card}>
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                sizes="(min-width: 1024px) 28vw, 78vw"
-                className={styles.cardImage}
-              />
-              <span className={styles.scrim} aria-hidden="true" />
-              <div className={styles.cardTop}>
-                <span className={styles.cardNumber}>{card.number}</span>
-                <h3 className={styles.cardTitle}>{card.title}</h3>
+          {CARDS.map((card, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <div
+                key={card.title}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isActive}
+                onClick={() => toggleCard(index)}
+                onKeyDown={(event) => handleKeyDown(event, index)}
+                className={[
+                  styles.card,
+                  isActive ? styles.cardActive : "",
+                  card.dark ? styles.cardDark : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <div className={styles.cardImageWrap}>
+                  {card.image ? (
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      sizes="(min-width: 1024px) 38vw, 90vw"
+                      className={styles.cardImage}
+                    />
+                  ) : (
+                    <ImagePlaceholder
+                      label="Imagen próximamente"
+                      ratio="1 / 1"
+                      className={styles.cardImagePlaceholder}
+                    />
+                  )}
+                </div>
+                <span className={styles.cardScrim} aria-hidden="true" />
+                <div className={styles.cardTop}>
+                  <span className={styles.cardNumber}>{card.number}</span>
+                  <h3 className={styles.cardTitle}>{card.title}</h3>
+                </div>
+                <span className={styles.cardToggle} aria-hidden="true">
+                  {isActive ? "×" : "+"}
+                </span>
+
+                <div className={styles.cardPanel}>
+                  <div className={styles.cardPanelInner}>
+                    <HashLink
+                      href={card.href}
+                      className={styles.cardPanelLink}
+                      aria-label={`Ver ${card.title}`}
+                      onClick={(event) => event.stopPropagation()}
+                    >
+                      <span aria-hidden="true">↗</span>
+                    </HashLink>
+                    <p className={styles.cardPanelText}>{card.description}</p>
+                  </div>
+                </div>
               </div>
-              <div className={styles.cardDesc}>
-                <span className={styles.divider} aria-hidden="true" />
-                <p className={styles.cardDescText}>{card.description}</p>
-              </div>
-              <span className={styles.plus} aria-hidden="true">
-                +
-              </span>
-            </HashLink>
-          ))}
+            );
+          })}
         </div>
       </Reveal>
     </section>

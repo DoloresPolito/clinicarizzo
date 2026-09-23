@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
-import { Barlow } from "next/font/google";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
 import "./globals.scss";
-
-const barlow = Barlow({
-  variable: "--font-barlow",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   title: "Clinica Rizzo",
@@ -27,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={barlow.variable}>
+    <html lang="es">
       <body>
         <SmoothScroll>
           <Header />

@@ -33,3 +33,64 @@ $max-width: 1400px;
     }
   }
 }
+
+// Sistema tipográfico — Helvetica Neue
+// Eyebrow: kicker corto sobre los títulos de sección.
+@mixin type-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+// Label: etiquetas cortas en mayúscula (ej. "Dirección", "Horarios").
+@mixin type-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+// Texto de cuerpo, párrafos principales.
+@mixin type-body {
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+// Datos de detalle (direcciones, horarios).
+@mixin type-data {
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+// Botones y CTAs.
+@mixin type-button {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+// Encabezado de sección: línea de acento + eyebrow en mayúscula,
+// el mismo patrón usado en Contacto, replicado en todas las secciones.
+@mixin section-eyebrow {
+  @include type-eyebrow;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
+
+@mixin section-eyebrow-line {
+  width: 1.75rem;
+  height: 1px;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+// Título grande de sección — un poco más chico que el de Contacto.
+@mixin section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  line-height: 1.05;
+}

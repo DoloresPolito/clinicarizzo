@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import HashLink from "../HashLink/HashLink";
 import Parallax from "../Parallax/Parallax";
 import Reveal from "../Reveal/Reveal";
 import styles from "./TechnologySection.module.scss";
@@ -17,7 +17,10 @@ export default function TechnologySection() {
       <div className={styles.inner}>
         <div className={styles.copy}>
           <Reveal>
-            <p className={styles.eyebrow}>Tecnología</p>
+            <p className={styles.eyebrow}>
+              <span className={styles.eyebrowLine} aria-hidden="true" />
+              Tecnología
+            </p>
           </Reveal>
           <Reveal delay={80}>
             <h2 className={styles.title}>
@@ -34,9 +37,9 @@ export default function TechnologySection() {
             </p>
           </Reveal>
           <Reveal delay={240}>
-            <Link href="/tratamientos" className={styles.button}>
+            <HashLink href="/#tratamientos" className={styles.button}>
               Conocé nuestra tecnología <span aria-hidden="true">→</span>
-            </Link>
+            </HashLink>
           </Reveal>
         </div>
 

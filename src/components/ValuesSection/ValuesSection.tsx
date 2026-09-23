@@ -35,7 +35,10 @@ export default function ValuesSection({
     <section id="nosotros" className={styles.section}>
       <div className={styles.inner}>
         <Reveal>
-          <p className={styles.eyebrow}>Nuestra experiencia</p>
+          <p className={styles.eyebrow}>
+            <span className={styles.eyebrowLine} aria-hidden="true" />
+            Nuestra experiencia
+          </p>
         </Reveal>
         <Reveal delay={80}>
           <h2 className={styles.title}>

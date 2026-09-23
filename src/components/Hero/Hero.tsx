@@ -25,6 +25,7 @@ export default function Hero() {
         <div className={styles.copy}>
           <Reveal delay={0}>
             <p className={styles.eyebrow}>
+              <span className={styles.eyebrowLine} aria-hidden="true" />
               Centro odontológico · Gualeguaychú
             </p>
           </Reveal>

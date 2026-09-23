@@ -1,111 +1,74 @@
 @use "tokens" as t;
 
 .section {
-  position: relative;
-  overflow: hidden;
   background: var(--color-surface-alt);
   scroll-margin-top: 4.75rem;
 }
 
-.parallaxLayer {
-  position: absolute;
-  inset: -8% 0;
-  z-index: 0;
-}
-
-.backgroundImage {
-  object-fit: cover;
-  object-position: 25% center;
-  animation: contact-zoom 24s ease-in-out infinite alternate;
-
-  @include t.respond(tablet) {
-    object-position: 42% center;
-  }
+.grid {
+  display: flex;
+  flex-direction: column;
 
   @include t.respond(desktop) {
-    object-position: 58% center;
-  }
-}
-
-@keyframes contact-zoom {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.08);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .backgroundImage {
-    animation: none;
-  }
-}
-
-.scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(
-    to right,
-    rgba(238, 231, 216, 0.94) 0%,
-    rgba(238, 231, 216, 0.78) 42%,
-    rgba(238, 231, 216, 0.25) 65%,
-    rgba(238, 231, 216, 0) 80%
-  );
-}
-
-.inner {
-  @include t.container;
-  position: relative;
-  z-index: 2;
-  padding-block: 3.5rem;
-
-  @include t.respond(desktop) {
-    padding-block: 4.5rem;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 36rem;
   }
 }
 
 .copy {
-  max-width: 30rem;
+  flex: 1;
+  padding: 3.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include t.respond(desktop) {
+    padding: 4rem clamp(2rem, 5vw, 4.5rem) 4rem clamp(1.5rem, 6vw, 5rem);
+    max-width: 42rem;
+  }
 }
 
 .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  margin-bottom: 1rem;
+  @include t.section-eyebrow;
+  margin-bottom: 1.5rem;
+}
+
+.eyebrowLine {
+  @include t.section-eyebrow-line;
 }
 
 .title {
-  font-size: clamp(1.6rem, 2.8vw, 2.1rem);
-  font-weight: 600;
+  @include t.section-title;
 }
 
 .text {
-  margin-top: 1.25rem;
+  @include t.type-body;
+  margin-top: 1.5rem;
   color: var(--color-text-muted);
-  font-size: 0.95rem;
+  font-size: 1rem;
+  max-width: 26rem;
 }
 
 .whatsapp {
+  @include t.type-button;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 1.75rem;
-  padding: 0.85rem 1.6rem;
+  margin-top: 2rem;
+  padding: 0.9rem 1.7rem;
   border-radius: var(--radius-pill);
   background: var(--color-olive);
   color: var(--color-olive-contrast);
-  font-size: 0.88rem;
-  font-weight: 600;
   transition: background 0.2s ease;
 
-  svg {
-    width: 1.1rem;
-    height: 1.1rem;
+  svg:first-child {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  span {
+    margin-left: 0.15rem;
   }
 
   &:hover {
@@ -113,41 +76,127 @@
   }
 }
 
-.schedule {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
+.details {
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
   border-top: 1px solid var(--color-border);
 }
 
-.scheduleTitle {
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--color-text-muted);
-  margin-bottom: 1.1rem;
-}
-
-.scheduleGrid {
+.detailsGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem 2.5rem;
+  gap: 1.5rem 1.5rem;
+
+  @include t.respond(tablet) {
+    flex-wrap: nowrap;
+  }
 }
 
-.scheduleLabel {
-  display: inline-block;
-  padding: 0.25rem 0.7rem;
-  border-radius: var(--radius-sm);
-  background: var(--color-accent);
-  color: var(--color-accent-contrast);
-  font-size: 0.8rem;
-  font-weight: 700;
+.detailItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  min-width: 0;
 }
 
-.scheduleHours {
-  margin-top: 0.5rem;
+.detailIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.detailLabel {
+  @include t.type-label;
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.3rem;
+  white-space: nowrap;
+}
+
+.detailText {
+  @include t.type-data;
+  font-size: 0.85rem;
   display: flex;
   flex-direction: column;
-  font-size: 0.92rem;
   color: var(--color-text);
+  white-space: nowrap;
+}
+
+.visual {
+  position: relative;
+  min-height: 20rem;
+
+  @include t.respond(desktop) {
+    flex: 1;
+    min-height: auto;
+  }
+}
+
+.visualImage {
+  object-fit: cover;
+}
+
+.banner {
+  background: var(--color-olive);
+  color: var(--color-olive-contrast);
+  overflow: hidden;
+  padding-block: 0.7rem;
+}
+
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 50s linear infinite;
+
+  .banner:hover & {
+    animation-play-state: paused;
+  }
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding-inline: 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  white-space: nowrap;
+}
+
+.dot {
+  opacity: 0.6;
+  font-size: 0.7em;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
 }

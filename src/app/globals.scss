@@ -9,16 +9,16 @@
   --color-accent: #d9661f;
   --color-accent-strong: #b8531a;
   --color-accent-contrast: #ffffff;
-  --color-olive: #55624a;
-  --color-olive-strong: #454f3c;
-  --color-olive-contrast: #f3efe1;
-  --color-olive-muted: rgba(243, 239, 225, 0.7);
+  --color-olive: #c8c9a7;
+  --color-olive-strong: #aaab8e;
+  --color-olive-contrast: #21201b;
+  --color-olive-muted: rgba(33, 32, 27, 0.62);
   --color-border: rgba(33, 32, 27, 0.14);
   --color-dark: #55624a;
   --color-dark-text-muted: rgba(243, 239, 225, 0.7);
 
-  --font-heading: var(--font-barlow), Arial, Helvetica, sans-serif;
-  --font-body: var(--font-barlow), Arial, Helvetica, sans-serif;
+  --font-heading: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --radius-sm: 6px;
   --radius-md: 14px;
@@ -81,8 +81,8 @@ h4 {
   font-family: var(--font-heading);
   margin: 0;
   line-height: 1.1;
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  font-weight: 400;
+  letter-spacing: normal;
 }
 
 p {

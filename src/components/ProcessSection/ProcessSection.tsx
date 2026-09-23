@@ -29,7 +29,10 @@ export default function ProcessSection() {
     <section className={styles.section}>
       <div className={styles.inner}>
         <Reveal>
-          <p className={styles.eyebrow}>Metodología</p>
+          <p className={styles.eyebrow}>
+            <span className={styles.eyebrowLine} aria-hidden="true" />
+            Metodología
+          </p>
         </Reveal>
         <Reveal delay={80}>
           <h2 className={styles.title}>

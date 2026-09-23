@@ -9,18 +9,16 @@
 }
 
 .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.78rem;
-  color: var(--color-text-muted);
-  font-weight: 600;
-  margin-bottom: 1rem;
+  @include t.section-eyebrow;
+}
+
+.eyebrowLine {
+  @include t.section-eyebrow-line;
 }
 
 .title {
-  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  @include t.section-title;
   max-width: 40rem;
-  font-weight: 600;
 }
 
 .grid {

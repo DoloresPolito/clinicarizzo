@@ -9,9 +9,9 @@ import styles from "./Header.module.scss";
 const NAV_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
-  { label: "Tratamientos", href: "/tratamientos" },
+  { label: "Tratamientos", href: "/#tratamientos" },
   { label: "Tecnología", href: "/#tecnologia" },
-  { label: "Equipo", href: "/equipo" },
+  { label: "Equipo", href: "/#equipo" },
   { label: "Contacto", href: "/#contacto" },
 ];
 

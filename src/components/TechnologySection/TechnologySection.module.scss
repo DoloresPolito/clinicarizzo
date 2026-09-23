@@ -28,26 +28,26 @@
 }
 
 .eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  margin-bottom: 1rem;
+  @include t.section-eyebrow;
+}
+
+.eyebrowLine {
+  @include t.section-eyebrow-line;
 }
 
 .title {
-  font-size: clamp(1.5rem, 2.6vw, 2rem);
-  font-weight: 600;
+  @include t.section-title;
 }
 
 .text {
+  @include t.type-body;
   margin-top: 1.25rem;
   color: var(--color-text-muted);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
 }
 
 .button {
+  @include t.type-button;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -55,8 +55,6 @@
   padding: 0.8rem 1.5rem;
   border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
-  font-size: 0.82rem;
-  font-weight: 500;
   transition:
     border-color 0.2s ease,
     color 0.2s ease;
@@ -98,9 +96,9 @@
 
   li {
     font-size: 0.78rem;
-    font-weight: 600;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--color-text);
   }
 }

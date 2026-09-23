@@ -6,8 +6,8 @@ import styles from "./Footer.module.scss";
 const NAV_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Nosotros", href: "/nosotros" },
-  { label: "Tratamientos", href: "/tratamientos" },
-  { label: "Equipo", href: "/equipo" },
+  { label: "Tratamientos", href: "/#tratamientos" },
+  { label: "Equipo", href: "/#equipo" },
   { label: "Contacto", href: "/#contacto" },
 ];
 
