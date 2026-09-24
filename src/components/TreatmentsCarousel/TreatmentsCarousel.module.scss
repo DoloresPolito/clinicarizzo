@@ -301,8 +301,17 @@
 // En mobile/tablet chico no hay lugar para abrir la tarjeta hacia el
 // costado: el panel aparece sobre la imagen, sin cambiar el tamaño.
 @media (max-width: 767px) {
+  // Al deslizar se pasa de a una tarjeta: el snap es obligatorio, no deja
+  // saltear tarjetas con un swipe rápido y alinea cada una con el margen.
+  // La siguiente asoma a la derecha como pista de que se puede deslizar.
+  .track {
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+  }
+
   .card {
     --card-h: clamp(280px, 90vw, 330px);
+    scroll-snap-stop: always;
   }
 
   .cardActive {

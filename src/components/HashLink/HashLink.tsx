@@ -14,8 +14,6 @@ type HashLinkProps = Omit<
   onClick?: MouseEventHandler<HTMLAnchorElement>;
 };
 
-const HEADER_OFFSET = -76;
-
 export default function HashLink({
   href,
   children,
@@ -31,17 +29,32 @@ export default function HashLink({
 
   const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
     onClick?.(event);
-    if (event.defaultPrevented || !hash) return;
+    if (event.defaultPrevented) return;
 
     const samePage = path === "" || path === pathname;
     if (!samePage) return;
 
+    // Link a la misma página sin hash (ej. "Inicio" estando en "/"):
+    // se vuelve arriba de todo con Lenis en vez de navegar.
+    if (!hash) {
+      event.preventDefault();
+      if (lenis) {
+        lenis.scrollTo(0);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      window.history.pushState(null, "", path || pathname);
+      return;
+    }
+
     const target = document.getElementById(hash);
     if (!target) return;
 
+    // El espacio del header lo da el scroll-margin-top de cada sección
+    // (Lenis y scrollIntoView lo respetan), así que no se suma offset.
     event.preventDefault();
     if (lenis) {
-      lenis.scrollTo(target, { offset: HEADER_OFFSET });
+      lenis.scrollTo(target);
     } else {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     }

@@ -4,8 +4,6 @@ import { ReactLenis, useLenis } from "lenis/react";
 import { usePathname } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 
-const HEADER_OFFSET = -76;
-
 function HashScrollOnRouteChange() {
   const lenis = useLenis();
   const pathname = usePathname();
@@ -18,7 +16,7 @@ function HashScrollOnRouteChange() {
       const target = document.getElementById(hash.slice(1));
       if (target) {
         lenis.resize();
-        lenis.scrollTo(target, { offset: HEADER_OFFSET, immediate: true });
+        lenis.scrollTo(target, { immediate: true });
       }
     }, 60);
 

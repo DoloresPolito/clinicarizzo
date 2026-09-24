@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState, type CSSProperties } from "react";
 import { useLenis } from "lenis/react";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HashLink from "../HashLink/HashLink";
 import ArrowIcon from "../ArrowIcon/ArrowIcon";
@@ -111,7 +110,7 @@ export default function Header() {
     <>
       <header className={styles.header}>
         <div className={styles.inner}>
-          <Link href="/" className={styles.logo} onClick={closeMenu}>
+          <HashLink href="/" className={styles.logo} onClick={closeMenu}>
             <Image
               src="/logo/logo.png"
               alt="Clínica Rizzo"
@@ -124,7 +123,7 @@ export default function Header() {
               <span className={styles.logoLight}>Clínica</span>
               <span className={styles.logoBold}>RIZZO</span>
             </span>
-          </Link>
+          </HashLink>
 
           <nav className={styles.nav}>
             <ul>

@@ -15,6 +15,7 @@ $header-height: 4.75rem;
 .anchor {
   position: absolute;
   top: 0;
+  scroll-margin-top: $header-height;
 
   @include t.respond(desktop) {
     top: $header-height;
