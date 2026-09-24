@@ -112,7 +112,7 @@ export default function Header() {
         <div className={styles.inner}>
           <HashLink href="/" className={styles.logo} onClick={closeMenu}>
             <Image
-              src="/logo/logo.png"
+              src="/logo/logo2.png"
               alt="Clínica Rizzo"
               width={40}
               height={40}
@@ -172,6 +172,16 @@ export default function Header() {
         aria-hidden={!isMenuOpen}
         inert={!isMenuOpen}
       >
+        <button
+          type="button"
+          className={styles.drawerClose}
+          aria-label="Cerrar menú"
+          onClick={closeMenu}
+        >
+          <span />
+          <span />
+        </button>
+
         <nav className={styles.drawerNav}>
           <ul>
             {NAV_LINKS.map((link, index) => (

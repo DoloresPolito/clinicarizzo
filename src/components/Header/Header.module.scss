@@ -134,6 +134,12 @@ $ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }
 
+// Con el drawer abierto, el cierre lo maneja la cruz del propio drawer.
+.menuToggleOpen {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .menuToggleOpen span {
   &:nth-child(1) {
     transform: translateY(0) rotate(45deg);
@@ -155,7 +161,7 @@ $ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 .backdrop {
   position: fixed;
   inset: 0;
-  z-index: 40;
+  z-index: 55;
   background: rgba(33, 32, 27, 0.28);
   backdrop-filter: blur(6px);
   opacity: 0;
@@ -177,12 +183,12 @@ $ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 45; // debajo del header (50) para que el botón siga visible
+  z-index: 60; // encima del header: el drawer tiene su propia cruz
   width: min(86vw, 26rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: calc(4.75rem + 2.5rem) 2rem 2.5rem;
+  padding: 6rem 2rem 2.5rem;
   background: var(--color-surface);
   border-top-left-radius: 2.5rem;
   box-shadow: -24px 0 60px rgba(33, 32, 27, 0.12);
@@ -198,6 +204,40 @@ $ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 .drawerOpen {
   transform: translateX(0);
   transition-delay: 0s;
+}
+
+.drawerClose {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(33, 32, 27, 0.12);
+  }
+
+  span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 18px;
+    height: 2px;
+    margin: -1px 0 0 -9px;
+    background: var(--color-text);
+    border-radius: 2px;
+
+    &:nth-child(1) {
+      transform: rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      transform: rotate(-45deg);
+    }
+  }
 }
 
 .drawerNav ul {

@@ -17,7 +17,7 @@ export default function Footer() {
       <div className={styles.inner}>
         <Link href="/" className={styles.logo}>
           <Image
-            src="/logo/logo.png"
+            src="/logo/logo2.png"
             alt="Clínica Rizzo"
             width={36}
             height={36}
@@ -104,7 +104,16 @@ export default function Footer() {
             © {new Date().getFullYear()} Clínica Rizzo. Todos los derechos
             reservados.
           </p>
-          <p className={styles.tagline}>Sonrisas que acompañan tu vida.</p>
+          <p className={styles.credit}>
+            Sitio hecho por{" "}
+            <a
+              href="https://vintestudio.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Vintestudio
+            </a>
+          </p>
         </div>
       </div>
     </footer>

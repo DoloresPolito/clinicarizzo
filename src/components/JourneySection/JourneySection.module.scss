@@ -208,8 +208,11 @@ $header-height: 4.75rem;
   object-fit: cover;
 }
 
-// Animaciones entre pasos (solo desktop): la imagen entra "barriendo" de
-// abajo hacia arriba y sale hacia arriba; título y texto se desvanecen.
+// Animaciones entre pasos (solo desktop): las imágenes se apilan como una
+// pila de fotos. Al avanzar, la nueva entra "barriendo" de abajo hacia arriba
+// por encima de la anterior, que queda quieta debajo; al retroceder, la de
+// arriba se retira hacia abajo y descubre la anterior. Así el scroll hacia
+// arriba es exactamente la animación inversa. Título y texto se desvanecen.
 @include t.respond(desktop) {
   .cardTitle,
   .cardText {
@@ -239,18 +242,17 @@ $header-height: 4.75rem;
     [data-state="next"] > & {
       clip-path: inset(100% 0 0 0 round var(--radius-lg));
     }
-
-    [data-state="past"] > & {
-      clip-path: inset(0 0 100% 0 round var(--radius-lg));
-    }
   }
 
   .mediaImage {
     transition: transform 1.2s $ease-out;
 
-    [data-state="next"] &,
-    [data-state="past"] & {
+    // El zoom solo acompaña la entrada. Al volver a "next" (scroll hacia
+    // arriba) la imagen se retira sin agrandarse y recupera el zoom recién
+    // cuando ya quedó oculta.
+    [data-state="next"] & {
       transform: scale(1.12);
+      transition: transform 0s linear 0.9s;
     }
   }
 }
