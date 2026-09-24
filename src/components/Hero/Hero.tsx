@@ -2,6 +2,7 @@ import Image from "next/image";
 import HashLink from "../HashLink/HashLink";
 import Parallax from "../Parallax/Parallax";
 import Reveal from "../Reveal/Reveal";
+import ArrowIcon from "../ArrowIcon/ArrowIcon";
 import styles from "./Hero.module.scss";
 
 const HIGHLIGHTS = [
@@ -50,7 +51,7 @@ export default function Hero() {
           </Reveal>
           <Reveal delay={450}>
             <HashLink href="/#contacto" className={styles.cta}>
-              Reservar turno <span aria-hidden="true">→</span>
+              Reservar turno <ArrowIcon />
             </HashLink>
           </Reveal>
         </div>

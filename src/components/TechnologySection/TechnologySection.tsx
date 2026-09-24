@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Parallax from "../Parallax/Parallax";
 import Reveal from "../Reveal/Reveal";
 import styles from "./TechnologySection.module.scss";
 
@@ -36,7 +35,7 @@ export default function TechnologySection() {
           </Reveal>
         </div>
 
-        <Parallax speed={0.12} max={26} className={styles.visual}>
+        <div className={styles.visual}>
           <Reveal variant="zoom">
             <Image
               src="/imagenes/tomo-final.jpeg"
@@ -47,7 +46,7 @@ export default function TechnologySection() {
               sizes="(min-width: 1024px) 24rem, 80vw"
             />
           </Reveal>
-        </Parallax>
+        </div>
 
         <ul className={styles.highlights}>
           {HIGHLIGHTS.map((item, index) => (

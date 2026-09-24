@@ -1,16 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type CSSProperties } from "react";
+import { useLenis } from "lenis/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import HashLink from "../HashLink/HashLink";
+import ArrowIcon from "../ArrowIcon/ArrowIcon";
 import styles from "./Header.module.scss";
 
 const NAV_LINKS = [
   { label: "Inicio", href: "/" },
-  { label: "Nosotros", href: "/nosotros" },
   { label: "Tratamientos", href: "/#tratamientos" },
+  { label: "Proceso", href: "/#proceso" },
   { label: "Tecnología", href: "/#tecnologia" },
   { label: "Equipo", href: "/#equipo" },
   { label: "Contacto", href: "/#contacto" },
@@ -20,6 +22,7 @@ const NAV_LINKS = [
 const HOME_SECTIONS = [
   { id: "top", href: "/" },
   { id: "tratamientos", href: "/#tratamientos" },
+  { id: "proceso", href: "/#proceso" },
   { id: "tecnologia", href: "/#tecnologia" },
   { id: "equipo", href: "/#equipo" },
   { id: "contacto", href: "/#contacto" },
@@ -70,61 +73,138 @@ function useActiveHref() {
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const activeHref = useActiveHref();
+  const lenis = useLenis();
+
+  // Se reactiva Lenis en el mismo click para que el scroll de HashLink
+  // (que corre justo después) no quede bloqueado.
+  const closeMenu = useCallback(() => {
+    lenis?.start();
+    setIsMenuOpen(false);
+  }, [lenis]);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    lenis?.stop();
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu();
+    };
+    // Si se agranda la pantalla a desktop, el drawer no tiene sentido.
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) closeMenu();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", onDesktop);
+    return () => {
+      lenis?.start();
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", onDesktop);
+    };
+  }, [isMenuOpen, lenis, closeMenu]);
 
   return (
-    <header className={styles.header}>
-      <div className={styles.inner}>
-        <Link href="/" className={styles.logo}>
-          <Image
-            src="/logo/logo.png"
-            alt="Clínica Rizzo"
-            width={40}
-            height={40}
-            className={styles.logoImage}
-            priority
-          />
-          <span className={styles.logoText}>
-            <span className={styles.logoLight}>Clínica</span>
-            <span className={styles.logoBold}>RIZZO</span>
-          </span>
-        </Link>
+    <>
+      <header className={styles.header}>
+        <div className={styles.inner}>
+          <Link href="/" className={styles.logo} onClick={closeMenu}>
+            <Image
+              src="/logo/logo.png"
+              alt="Clínica Rizzo"
+              width={40}
+              height={40}
+              className={styles.logoImage}
+              priority
+            />
+            <span className={styles.logoText}>
+              <span className={styles.logoLight}>Clínica</span>
+              <span className={styles.logoBold}>RIZZO</span>
+            </span>
+          </Link>
 
-        <nav className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}>
+          <nav className={styles.nav}>
+            <ul>
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <HashLink
+                    href={link.href}
+                    className={link.href === activeHref ? styles.active : undefined}
+                    aria-current={link.href === activeHref ? "true" : undefined}
+                  >
+                    {link.label}
+                  </HashLink>
+                </li>
+              ))}
+            </ul>
+            <HashLink href="/#contacto" className={styles.cta}>
+              Reservar turno <ArrowIcon />
+            </HashLink>
+          </nav>
+
+          <button
+            type="button"
+            className={`${styles.menuToggle} ${isMenuOpen ? styles.menuToggleOpen : ""}`}
+            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => (isMenuOpen ? closeMenu() : setIsMenuOpen(true))}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+      </header>
+
+      {/* El drawer va fuera del <header>: su backdrop-filter crearía un
+          containing block y el position: fixed quedaría atrapado adentro. */}
+      <div
+        className={`${styles.backdrop} ${isMenuOpen ? styles.backdropOpen : ""}`}
+        onClick={closeMenu}
+        aria-hidden="true"
+      />
+      <aside
+        id="mobile-menu"
+        className={`${styles.drawer} ${isMenuOpen ? styles.drawerOpen : ""}`}
+        aria-hidden={!isMenuOpen}
+        inert={!isMenuOpen}
+      >
+        <nav className={styles.drawerNav}>
           <ul>
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+            {NAV_LINKS.map((link, index) => (
+              <li
+                key={link.href}
+                style={{ "--i": index } as CSSProperties}
+              >
                 <HashLink
                   href={link.href}
                   className={link.href === activeHref ? styles.active : undefined}
                   aria-current={link.href === activeHref ? "true" : undefined}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={closeMenu}
                 >
-                  {link.label}
+                  <span className={styles.drawerIndex}>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className={styles.drawerLabel}>{link.label}</span>
                 </HashLink>
               </li>
             ))}
           </ul>
-          <HashLink
-            href="/#contacto"
-            className={styles.cta}
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Reservar turno <span aria-hidden="true">→</span>
-          </HashLink>
         </nav>
 
-        <button
-          type="button"
-          className={styles.menuToggle}
-          aria-label="Abrir menú"
-          aria-expanded={isMenuOpen}
-          onClick={() => setIsMenuOpen((open) => !open)}
+        <div
+          className={styles.drawerFooter}
+          style={{ "--i": NAV_LINKS.length } as CSSProperties}
         >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
-    </header>
+          <HashLink href="/#contacto" className={styles.cta} onClick={closeMenu}>
+            Reservar turno <ArrowIcon />
+          </HashLink>
+        </div>
+      </aside>
+    </>
   );
 }

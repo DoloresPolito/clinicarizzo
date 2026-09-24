@@ -96,39 +96,196 @@
   }
 }
 
+$ease-drawer: cubic-bezier(0.77, 0, 0.175, 1);
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
 .menuToggle {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 0.5rem;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
 
   @include t.respond(desktop) {
     display: none;
   }
 
+  // Las tres líneas se apilan desde el centro y se transforman en una X.
   span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
     width: 22px;
     height: 2px;
+    margin-left: -11px;
     background: var(--color-text);
+    border-radius: 2px;
+    transition:
+      transform 0.45s $ease-drawer,
+      opacity 0.25s ease,
+      width 0.35s $ease-drawer;
+
+    &:nth-child(1) {
+      transform: translateY(-7px);
+    }
+
+    &:nth-child(3) {
+      width: 14px;
+      transform: translateY(7px);
+    }
   }
 }
 
-// Menú mobile desplegado
-.navOpen {
-  display: flex;
-  position: absolute;
-  top: 4.75rem;
-  left: 0;
-  right: 0;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+.menuToggleOpen span {
+  &:nth-child(1) {
+    transform: translateY(0) rotate(45deg);
+  }
 
-  ul {
-    flex-direction: column;
-    gap: 1rem;
+  &:nth-child(2) {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+
+  &:nth-child(3) {
+    width: 22px;
+    transform: translateY(0) rotate(-45deg);
+  }
+}
+
+// ——— Menú mobile: drawer lateral ———
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(33, 32, 27, 0.28);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+
+  @include t.respond(desktop) {
+    display: none;
+  }
+}
+
+.backdropOpen {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 45; // debajo del header (50) para que el botón siga visible
+  width: min(86vw, 26rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(4.75rem + 2.5rem) 2rem 2.5rem;
+  background: var(--color-surface);
+  border-top-left-radius: 2.5rem;
+  box-shadow: -24px 0 60px rgba(33, 32, 27, 0.12);
+  transform: translateX(105%);
+  // El cierre espera a que los links terminen de salir.
+  transition: transform 0.6s $ease-drawer 0.1s;
+
+  @include t.respond(desktop) {
+    display: none;
+  }
+}
+
+.drawerOpen {
+  transform: translateX(0);
+  transition-delay: 0s;
+}
+
+.drawerNav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.drawerNav li,
+.drawerFooter {
+  opacity: 0;
+  transform: translateX(2.5rem);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  .drawerOpen & {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity 0.6s ease,
+      transform 0.7s $ease-out;
+    // Entrada en cascada, arrancando cuando el panel ya está llegando.
+    transition-delay: calc(0.25s + var(--i) * 0.06s);
+  }
+}
+
+.drawerNav a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  color: var(--color-heading);
+
+  &.active {
+    color: var(--color-accent);
+
+    .drawerLabel::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.drawerIndex {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.drawerLabel {
+  position: relative;
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.15rem;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s $ease-out;
+  }
+}
+
+.drawerFooter {
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+
+  .cta {
+    font-size: 0.95rem;
+    padding: 0.85rem 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .backdrop,
+  .drawerNav li,
+  .drawerFooter,
+  .menuToggle span {
+    transition-duration: 0.01s !important;
+    transition-delay: 0s !important;
   }
 }

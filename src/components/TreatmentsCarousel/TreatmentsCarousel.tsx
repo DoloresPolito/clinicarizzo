@@ -5,6 +5,7 @@ import { useRef, useState, type KeyboardEvent, type WheelEvent } from "react";
 import HashLink from "../HashLink/HashLink";
 import ImagePlaceholder from "../ImagePlaceholder/ImagePlaceholder";
 import Reveal from "../Reveal/Reveal";
+import ArrowIcon from "../ArrowIcon/ArrowIcon";
 import styles from "./TreatmentsCarousel.module.scss";
 
 const CARDS = [
@@ -13,7 +14,7 @@ const CARDS = [
     title: "Cirugía e Implantología Oral",
     description:
       "Reponemos piezas perdidas con implantes de precisión, devolviendo función y estética a tu sonrisa.",
-    image: "/imagenes/tratamientos/t1.jpeg",
+    image: "/imagenes/tratamientos/implante.jpeg",
     href: "/tratamientos#implantes",
   },
   {
@@ -45,7 +46,7 @@ const CARDS = [
     title: "Odontología General",
     description:
       "Prevención, diagnóstico y controles periódicos para mantener tu salud bucal a largo plazo.",
-    image: null,
+    image: "/imagenes/tratamientos/odontogeneral.jpeg",
     href: "/tratamientos#general",
   },
   {
@@ -62,7 +63,7 @@ const CARDS = [
     title: "Estética Dental",
     description:
       "Mejoramos tu sonrisa de forma natural y armónica, con resultados que se ven y se sienten bien.",
-    image: "/imagenes/tratamientos/t5.jpeg",
+    image: "/imagenes/tratamientos/t1.jpeg",
     href: "/tratamientos#estetica",
   },
 ];
@@ -169,7 +170,7 @@ export default function TreatmentsCarousel() {
                       aria-label={`Ver ${card.title}`}
                       onClick={(event) => event.stopPropagation()}
                     >
-                      <span aria-hidden="true">↗</span>
+                      <ArrowIcon direction="up-right" />
                     </HashLink>
                     <p className={styles.cardPanelText}>{card.description}</p>
                   </div>

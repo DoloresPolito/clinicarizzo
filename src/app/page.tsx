@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero/Hero";
+import JourneySection from "@/components/JourneySection/JourneySection";
 import TechnologySection from "@/components/TechnologySection/TechnologySection";
 import TreatmentsCarousel from "@/components/TreatmentsCarousel/TreatmentsCarousel";
 import TeamIntroSection from "@/components/TeamIntroSection/TeamIntroSection";
@@ -9,6 +10,7 @@ export default function Home() {
     <main>
       <Hero />
       <TreatmentsCarousel />
+      <JourneySection />
       <TechnologySection />
       <TeamIntroSection />
       <ContactSection />
