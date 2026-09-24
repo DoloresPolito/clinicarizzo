@@ -6,7 +6,7 @@ import "./globals.scss";
 
 export const metadata: Metadata = {
   title: "Clinica Rizzo",
-  description: "Sitio web de Clinica Rizzo",
+  description: "Centro Odontológico",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
